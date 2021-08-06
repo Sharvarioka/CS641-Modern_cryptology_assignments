@@ -1,0 +1,45 @@
+Q1 Team name
+0 Points
+CodeNymro
+
+Q2 Commands
+10 Points
+List the commands used in the game to reach the ciphertext.
+go,back,read
+
+Q3 Cryptosystem
+10 Points
+What cryptosystem was used in this level?
+Playfair Cipher
+
+Q4 Analysis
+20 Points
+What tools and observations were used to figure out the cryptosystem? (Explain in less than 100 words)
+
+When we use command "go" , we observe some code consisting dots and dashes, after decoding  by using morse code chart ,it gives  "SECURITY" as the keyword or phrase. In the puzzle, we observed that the "PLAY FAIR" is capitalized, making sense because play fair cipher uses a key to decrypt the message.  Using "back" and then "read" commands we get the cipher. Following are the observations which make it clear that the cryptosystem is Playfair Cipher:
+1. There are even numbers of alphabetic characters in cipher.
+2.There are no Bigrams composed of identical characters.
+3.There are strictly less than 26 distinct characters in the cipher text.
+Q5 Decryption algorithm
+15 Points
+Briefly describe the decryption algorithm used. Also, mention the plaintext you deciphered. (Use less than 250 words)
+
+Decryption algorithm:
+Generate the key table(grid of 5X5) by filling in the spaces in the table (a modified Polybius square) with the letters of the keyword (dropping any duplicate letters).
+The key used here is one which has been extracted from the morse code and the key was found to be "SECURITY" by using morse chart.
+Next, fill the remaining spaces with the rest of the letters of the alphabet in order (usually omitting "J" or "Q" to reduce the alphabet to fit.
+Here we have omitted "J". We can also consider "I"="J". Punctuation marks are kept as they are. 
+Divide the text into pairs of letters (Bigrams) and apply the following rules according to the positions of the letters in the grid:
+
+1. If the two letters are on the same row, replace them by the ones on their left (loop to the right if the grid is an edge),
+2. If the two letters are on the same column, replace them by the ones directly above (loop to the bottom of the top of the grid is reached),
+3. Otherwise, replace the letters by the ones forming a rectangle with the original pair. Start with the letter on the same line as the first letter to decrypt.
+
+After decryption: BE WARY OF THE NEXT CHAMBER, THERE IS VERY LITTLE IOY THERE. SPEAK OUT XTHE PASSWORD "OPEN_SESAME" TO GO THROUGH. MAY XYOU HAVE THE STRENGTH FOR THE NEXT CHAMBER. TO FIND THE EXIT YOU FIRST WILXL NEXED TO UTTER MAGIC WORDS THERE
+After this decryption, consider "I" as "J" and ignore "X" if it occurs between two identical letters. Which makes the plain text as
+BE WARY OF THE NEXT CHAMBER, THERE IS VERY LITTLE JOY THERE. SPEAK OUT THE PASSWORD "OPEN_SESAME" TO GO THROUGH. MAY YOU HAVE THE STRENGTH FOR THE NEXT CHAMBER. TO FIND THE EXIT YOU FIRST WILL NEED TO UTTER MAGIC WORDS THERE.
+
+Q6 Password
+10 Points
+What was the final command used to clear this level?
+OPEN_SESAME

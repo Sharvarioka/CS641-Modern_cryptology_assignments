@@ -1,0 +1,63 @@
+Q2 Commands
+15 Points
+List the commands used in the game to reach the ciphertext.
+
+exit3, exit2, exit4, exit3, exit1, exit4, exit4, exit2, exit2, exit1, read
+Q3 Analysis
+60 Points
+Give a detailed description of the cryptanalysis used to figure out the password. (Explain in less than 150 lines and use Latex wherever required. If your solution is not readable, you will lose marks. If necessary, the file upload option in this question must be used TO SHARE IMAGES ONLY.)
+
+1.   The reason to use above mentioned commands in such particular order is that if we enter some other exit command, it gives some previously obtained combinations of characters. So after using several combinations,  we got the above-mentioned sequence of exit commands. i.e. "exit3, exit2, exit4, exit3, exit1, exit4, exit4, exit2, exit2, exit1, read". After entering the above-mentioned commands, we see a screen that says
+n = 84364443735725034864402554533826279174703893439763343343863260342756678609216895093779263028809246505955647572176682669445270008816481771701417554768871285020442403001649254405058303439906229201909599348669565697534331652019516409514800265887388539283381053937433496994442146419682027649079704982600857517093
+	CodeNymro: This door has RSA encryption with exponent 5 and the password is:
+ 	 23701787746829110396789094907319830305538180376427283226295906585301889543996533410539381779684366880970896279018807100530176651625086988655210858554133345906272561027798171440923147960165094891980452757852685707020289384698322665347609905744582248157246932007978339129630067022987966706955482598869800151693
+
+2.   Hence from here, we get to know that the cipher method used in this problem is  RSA encryption with exponent 5. Hence ee=5, CC is password mentioned as above.
+
+3.   RSA algorithm works by computing following equations:
+      Encryption of message MM:      C = M^eC=M 
+e
+  mod nn
+      Decryption of ciphertext CC:     M = C^dM=C 
+d
+  mod nn
+      ee \times× dd = 1 mod \phi(n)ϕ(n) 
+If we know \phi(n)ϕ(n), we can find ee such that 1 < ee < \phi(n)ϕ(n) and e,\phi(n)ϕ(n) are coprimes.   i.e. gcd(e,\phi(n))=1gcd(e,ϕ(n))=1. But here as nn is quite large, its cumbersome to calculate factors of nn which will be prime(say p and q) in order to calculate \phi(n)ϕ(n) . 
+
+4. As we can observe that given RSA encryption is with exponent 5 which is a small number. Hence we used Low Exponent RSA i.e. Coppersmith's theorem.
+
+5.  In order to use this theorem, we need a polynomial as an input. This algorithm suggests checking whether we require padding to the message. If C^\frac{1}{e}C 
+e
+1
+​	
+ 
+  is an integer, we require padding else there is no need for padding. 
+
+6.   In our example padding is required  so the equation becomes:
+           C = (Pad + M)^e(Pad+M) 
+e
+  mod n
+      Now, e, n and C are known and we need to find out Pad and M. 
+
+7.   We used Pad = 'CodeNymro: This door has RSA encryption with exponent 5 and the password is' but that did not work. Then we used the hexadecimal strings which we obtained earlier, corresponding to the exit commands. After converting the hexadecimal string into ASCII format, we got the padding as:
+  Pad = 'You see a Gold-Bug in one corner. It is the key to a treasure found by' 
+This did not work as well so we padded one blank space at the end of the padding. Hence Pad = 'You see a Gold-Bug in one corner. It is the key to a treasure found by '.
+
+8.   To compute the polynomial modulo nn, we used the function of coppersmith from https://github.com/mimoo/RSA-and-LLL-attacks/blob/master/coppersmith.sage and to break the RSA and find the password we implemented it in:  RSA_Coppersmith.sagews
+
+I. We convert the padding string into binary form.
+II. If we are finding for N^{1/e}N 
+1/e
+  of the message then it is a small root and we will be able to find it quickly. So, to find the possible root(M) we try the length from 0 to N^{1/e}N 
+1/e
+  by increasing the length by 8 each time.
+III. We want to find modulo NN where polynomial f(x) = (int(pad\_str\_binary, 2)<<pass\_len) + M)^e - Cf(x)=(int(pad_str_binary,2)<<pass_len)+M) 
+e
+ −C which has a root. 
+IV. We put beta as always 1. And XX is the upper bound on the root.
+V. In 9^{th}9 
+th
+  iteration i.e. for length = 64, we obtained the root.
+
+9. The Coppersmith's algorithm gives the value of root as  100001001000000011010000111010101100010010000010110110000100001 but it is 63 bits only. So we padded a zero at beginning of the root. So root=0100001001000000011010000111010101100010010000010110110000100001. Then we converted this 64 bit into chunks of 8 bit each. We converted this each chunk into decimal and this decimal value is then converted into ASCII value. Hence we got the decrypted password as: B@hubAl!
+

@@ -1,0 +1,60 @@
+Q1 Commands
+5 Points
+List the commands used in the game to reach the first ciphertext.
+go, read, enter and read
+
+Q2 Cryptosystem
+5 Points
+What cryptosystem was used in this level?
+Mono-alphabetic substitution 
+
+Q3 Analysis
+25 Points
+What tools and observations were used to figure out the cryptosystem? (Explain in less than 100 words)
+To solve this substitution cipher, we use “mc_assign1_edited.cpp” code. 
+
+The observation for substitution is following.
+Y&M has high frequency and "MEY" apears 5 times, so fair assumption M-t,E-h,Y-e.
+Single letter “P” can be "a" or 'i' and we choose P-a. “Wt” is guessed as ‘it’, so W-i. 
+From “e!th” where exclamation mark in between a word and "thi AiAtheT" (on last line) we can infer about jumbled arrangement of spaces, as substituting A-s and rearranging spaces we get "this is the T".
+After managing spaces we infer the words “JessaRe”-“message”, “Sest”-“rest”, “Tirst”-“first”
+“Gf iHterest”-“of interest”, “IhamOer”-“chammer”, “IaBes”-“caves”, “Kater”-“later”, “Vill”-“will”,  “Flaces”-“places”, “passworU”-“password”, “sNbstitNtion”,“substitution”, “Xou”-“you”, “Duotes”,-“Quotes”.
+
+As mentioned in cipher, digits are shifted by 8 and our decryption tool ignores digits
+so, we know 8 is also an shifted digit (ciphertext). so, actual digit is x which is shifted by x
+so 2x mod 10 = 8. hence, x can be 4 or 9.
+Now we tried possible passwords by shifting digits in password by 4 and 9 until level 0 gets cracked. We get correct digits in password( 6 and 9 respectively)  by shifting 0 and 3 by 4. 
+
+Q4 Mapping
+10 Points
+What is the plaintext space and ciphertext space? What is the mapping between the elements of plaintext space and the elements of ciphertext space? (Explain in less than 100 words)
+
+Plaintext space and ciphertext space are the sets of strings composed of {'a','b',..'z'} U {'A','B',..'Z'} U {0,1,..9}.
+The mapping between elements of ciphertext and plaintext space.
+y->e
+m->t
+e->h
+p->a
+w->i
+a->s
+j->m
+r->g
+s->r
+t->f
+h->n
+g->o
+i->c
+o->b
+b->v
+k->l
+v->w
+f->p
+u->d
+n->u
+x->y
+d->q
+
+Q5 Password
+5 Points
+What was the final command used to clear this level?
+tyRgU69diqq

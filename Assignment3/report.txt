@@ -1,0 +1,68 @@
+Q1 Team name
+0 Points
+CodeNymro
+
+Q2 Commands
+10 Points
+List the commands used in the game to reach the ciphertext.
+go, enter, pluck, back, give, back, back, thrnxxtzy, read.
+
+Q3 Analysis
+50 Points
+From the description of the question we get three equations as follows:
+g^{a_1} \times password = x_1g 
+a1×password=x1 -----(1)
+g^{a_2} \times password = x_2g 
+a2×password=x2 -----(2)
+g^{a_3} \times password = x_3g 
+a3×password=x3 -----(3)
+where, 
+a1= 324,
+a2= 2345,
+a3= 9145,
+x1= 13820704073802119244527501963,
+x2= 13250703864738017529092081924,
+x3= 12855368516529211269848301050
+
+From equations (1),(2),(3), we get,
+g^{{a_2}-{a_1}} = x_2 \times {x_1} ^ {-1}g 
+a2−a1=x2×x1^−1
+ 
+g^{2021} = x_2 × {x_1} ^ {-1}g 
+2021=x2×x1^−1
+ -----(4)
+g^{{a_3}-{a_2}} = x_3 × {x_2} ^ {-1}g 
+a3−a2=x3×x2^−1
+ 
+g^{7168} = x_2 × {x_1} ^{-1}g 
+7168=x2×x1^−1 -----(5)
+g^{{a_3}-{a_1}} = x_2 × {x_1} ^{-1}g 
+a3−a1=x2×x1^−1
+ 
+g^{9189} = x_2 × {x_1} ^ {-1}g 
+9189=x2×x1^−1 -----(6)
+
+By Eulers's theorem, 
+a_ϕ= 1 mod p   where a and p are coprimes. Also by Fermat's little theorem,
+a_p−1= 1 mod p. Since p is prime. Therefore, we need to find exponent of g which is coprime with p-1.
+Now, for every equation of form,
+g^{a_i} = x_k x x_mg 
+ai=x_k×x_m.
+We will check if gcd({a_i,p-1)=1.
+So after division of equation(5) with equation(4), we get, 
+g^5147= 5165300460841323641063575900-----(7)
+Now we will find modular inverse of 5147.
+Hence, let n = 5147^-1
+ 
+           n = 5953272168718036247193146063
+Calculating equation(7) raised to power n on both sides, we get,
+    g = 192847283928500239481729.
+By substituting value of g in equation 1, we get 
+password = {x_1}  × modular inverse of g^a_1
+​password = 3608528850368400786036725.
+
+ 
+Q4 Password
+10 Points
+What was the final command used to clear this level?
+3608528850368400786036725
